@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 import java.text.DecimalFormat;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDBHelper = new SpenDBHelper(this);
@@ -41,19 +43,29 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 int i = (int)Math.floor(Math.random() * conversions.keySet().size());
+                //TODO: Should handle an empty conversions table
                 String s = (String)conversions.keySet().toArray()[i];
                 double trueCost = Double.parseDouble(inputText.getText().toString()) / conversions.get(s);
                 resultText.setText(new DecimalFormat("#.##").format(trueCost) + " " + s);
 
             }
         });
-        Log.println(Log.INFO, "status", "cleared onclickone");
         Button manage = (Button) findViewById(R.id.manageButton);
 
         manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(MainActivity.this, ManageActivity.class);
+                startActivityForResult(in, 1);
+            }
+        });
+
+        Button discover = (Button) findViewById(R.id.discoverButton);
+
+        manage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(MainActivity.this, DiscoverActivity.class);
                 startActivityForResult(in, 1);
             }
         });
@@ -72,7 +84,6 @@ public class MainActivity extends Activity {
         final TextView resultText = (TextView)this.findViewById(R.id.resultText);
         resultText.setText("");
         Cursor cursor = mDBHelper.getReadableDatabase().rawQuery("select * from " + SpenDBHelper.FeedEntry.TABLE_NAME, null);
-        Log.println(Log.INFO, "status", "cleared cursor");
         if(cursor.moveToFirst()) {
             while(!cursor.isAfterLast())
             {
