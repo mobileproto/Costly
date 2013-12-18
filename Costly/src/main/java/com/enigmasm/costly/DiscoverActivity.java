@@ -38,7 +38,7 @@ public class DiscoverActivity extends Activity {
 
         final DiscoverListAdapter aa = new DiscoverListAdapter(ref, this, R.layout.discover_item);
 
-        final ListView notes = (ListView) findViewById(R.id.itemList);
+        final ListView notes = (ListView) findViewById(R.id.firebaseList);
 
         notes.setAdapter(aa);
 

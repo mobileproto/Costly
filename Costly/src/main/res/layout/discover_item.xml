@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Add"
         android:layout_alignParentRight="true"
-        android:id="@+id/deleteButton"
+        android:id="@+id/addButton"
         />
 
     <TextView
@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:layout_alignBottom="@+id/deleteButton"
-        android:layout_toLeftOf="@+id/deleteButton"
-        android:id="@+id/conversionText" />
+        android:id="@+id/conversionText"
+        android:layout_alignBottom="@+id/nameText"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

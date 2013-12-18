@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ManageActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/converts");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
 
@@ -59,15 +62,6 @@ public class ManageActivity extends Activity {
             savedDB.moveToNext();
         }
 
-        Button close = (Button)findViewById(R.id.closeButton);
-
-        close.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         //Adding the item to the database
         Button add = (Button)findViewById(R.id.addButton);
 
@@ -85,6 +79,8 @@ public class ManageActivity extends Activity {
                     ContentValues values = new ContentValues();
                     values.put(SpenDBHelper.FeedEntry.COLUMN_NAME, itemName);
                     values.put(SpenDBHelper.FeedEntry.COLUMN_PRICE, itemPrice);
+                    DiscoverItem item = new DiscoverItem(itemName,itemPrice);
+                    ref.push().setValue(item);
 
                     System.out.println("ADDED TO DATABASE");
                     // Insert the new row, returning the primary key value of the new row
@@ -93,7 +89,7 @@ public class ManageActivity extends Activity {
                             SpenDBHelper.FeedEntry.TABLE_NAME,
                             null,
                             values);
-                    aa.insert(itemName,0);
+                    aa.insert(itemName,aa.getCount());
                     aa.notifyDataSetChanged();
                 }
             }

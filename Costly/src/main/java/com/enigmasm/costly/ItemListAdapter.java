@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -58,11 +60,11 @@ public class ItemListAdapter extends ArrayAdapter {
                 // Issue SQL statement.
                 db.delete("items", selection, selectionArgs);
 
-                System.out.println("DELETING " + itemName);
-
                 ItemListAdapter.this.notifyDataSetChanged();
             }
         });
+        Animation in = AnimationUtils.loadAnimation(this.getContext(), android.R.anim.fade_in);
+        v.startAnimation(in);
 
         return v;
     }

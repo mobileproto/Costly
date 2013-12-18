@@ -5,11 +5,17 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher.ViewFactory;
+import android.widget.ViewSwitcher;
 
 import com.firebase.client.Firebase;
 
@@ -25,14 +31,29 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/");
         super.onCreate(savedInstanceState);
+        Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/converts");
         setContentView(R.layout.activity_main);
         mDBHelper = new SpenDBHelper(this);
-        refreshMap();
-        Log.println(Log.INFO, "status", "cleared database");
+        Animation in = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_in);
+        Animation out = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_out);
+        final TextSwitcher resultText = (TextSwitcher)this.findViewById(R.id.resultText);
+        resultText.setFactory(new ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView t = new TextView(MainActivity.this);
+                t.setGravity(Gravity.CENTER);
+                t.setText("");
+                return t;
+            }
+        });
+        resultText.setInAnimation(in);
+        resultText.setOutAnimation(out);
         final EditText inputText = (EditText)this.findViewById(R.id.inputText);
-        final TextView resultText = (TextView)this.findViewById(R.id.resultText);
+        refreshMap();
+
         resultText.setText("");
         conversions.put("five dollar footlongs", 5.0);
         conversions.put("brand new video games", 59.99);
@@ -62,7 +83,7 @@ public class MainActivity extends Activity {
 
         Button discover = (Button) findViewById(R.id.discoverButton);
 
-        manage.setOnClickListener(new View.OnClickListener() {
+        discover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(MainActivity.this, DiscoverActivity.class);
@@ -81,8 +102,6 @@ public class MainActivity extends Activity {
 
     private void refreshMap() {
         conversions.clear();
-        final TextView resultText = (TextView)this.findViewById(R.id.resultText);
-        resultText.setText("");
         Cursor cursor = mDBHelper.getReadableDatabase().rawQuery("select * from " + SpenDBHelper.FeedEntry.TABLE_NAME, null);
         if(cursor.moveToFirst()) {
             while(!cursor.isAfterLast())
