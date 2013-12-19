@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by kaustin on 10/16/13.
+ * Created by lego6245 on 10/16/13.
  */
 public class ItemListAdapter extends ArrayAdapter {
 

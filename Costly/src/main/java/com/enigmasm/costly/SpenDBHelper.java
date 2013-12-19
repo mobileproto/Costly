@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 /**
- * Created by kaustin on 10/16/13.
+ * Created by kai on 10/16/13.
  */
 public class SpenDBHelper extends SQLiteOpenHelper {
 

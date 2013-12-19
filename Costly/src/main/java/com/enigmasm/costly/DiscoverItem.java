@@ -7,12 +7,14 @@ public class DiscoverItem {
 
     private String name;
     private String conversion;
+    private String uid;
 
     private DiscoverItem() { }
 
-    DiscoverItem(String name, String conversion) {
+    DiscoverItem(String name, String conversion, String uid) {
         this.name = name;
         this.conversion = conversion;
+        this.uid = uid;
     }
 
     public String getName() {
@@ -22,6 +24,8 @@ public class DiscoverItem {
     public String getConversion() {
         return conversion;
     }
+
+    public String getUid() { return uid; }
 
 
 }

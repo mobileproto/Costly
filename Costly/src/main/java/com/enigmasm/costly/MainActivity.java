@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
-import android.widget.ViewSwitcher;
 
 import com.firebase.client.Firebase;
 

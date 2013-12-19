@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by kaustin on 10/16/13.
+ * Created by lego6245 on 10/16/13.
  */
 public class ManageActivity extends Activity {
 
@@ -79,7 +80,9 @@ public class ManageActivity extends Activity {
                     ContentValues values = new ContentValues();
                     values.put(SpenDBHelper.FeedEntry.COLUMN_NAME, itemName);
                     values.put(SpenDBHelper.FeedEntry.COLUMN_PRICE, itemPrice);
-                    DiscoverItem item = new DiscoverItem(itemName,itemPrice);
+                    String androidID = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+                    DiscoverItem item = new DiscoverItem(itemName,itemPrice, androidID);
                     ref.push().setValue(item);
                     // Insert the new row, returning the primary key value of the new row
                     long newRowId;
