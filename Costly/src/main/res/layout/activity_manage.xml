@@ -21,9 +21,11 @@
     <EditText
         android:layout_width="fill_parent"
         android:inputType="text"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/nameItemField"
-        android:layout_below="@+id/name_item" />
+        android:background="@drawable/rounded_edittext"
+        android:layout_below="@+id/name_item"
+        android:paddingLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,23 +42,39 @@
         android:layout_width="150dp"
         android:inputType="number"
         android:digits="0123456789."
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/priceField"
-        android:layout_below="@+id/cost_per" />
+        android:background="@drawable/rounded_edittext"
+        android:layout_below="@+id/cost_per"
+        android:paddingLeft="10dp" />
 
     <Button
         android:text="Add"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:id="@+id/addButton"
+        android:background="@drawable/rounded_button"
         android:layout_below="@+id/priceField"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignRight="@+id/nameItemField"
+        android:layout_alignEnd="@+id/nameItemField"
+        android:layout_marginRight="16dp" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/itemList"
         android:layout_below="@+id/addButton"
-        android:layout_alignRight="@+id/addButton" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Switch"
+        android:id="@+id/switch1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="838dp" />
 
 </RelativeLayout>

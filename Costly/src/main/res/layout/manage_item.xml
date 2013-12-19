@@ -17,9 +17,10 @@
         android:gravity="center_vertical" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="X"
+        android:background="@drawable/rounded_button"
         android:layout_alignParentRight="true"
         android:id="@+id/deleteButton"
         />

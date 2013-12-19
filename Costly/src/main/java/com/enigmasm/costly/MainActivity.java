@@ -2,6 +2,8 @@ package com.enigmasm.costly;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
 
     static Map<String, Double> conversions = new HashMap<String, Double>();
     public static SpenDBHelper mDBHelper;
+    private int priorChoosing = -1;
 
 
     @Override
@@ -45,7 +48,10 @@ public class MainActivity extends Activity {
             public View makeView() {
                 TextView t = new TextView(MainActivity.this);
                 t.setGravity(Gravity.CENTER);
+                t.setTextSize(30);
+                t.setTextColor(Color.rgb(154,149,114));
                 t.setText("");
+                t.setTypeface(null, Typeface.BOLD);
                 return t;
             }
         });
@@ -55,9 +61,6 @@ public class MainActivity extends Activity {
         refreshMap();
 
         resultText.setText("");
-        conversions.put("five dollar footlongs", 5.0);
-        conversions.put("brand new video games", 59.99);
-        conversions.put("hours of work", 8.5);
 
         Button convert = (Button)this.findViewById(R.id.costButton);
         convert.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +70,11 @@ public class MainActivity extends Activity {
                 if(size > 0)
                 {
                     int i = (int)Math.floor(Math.random() * size);
+                    while(priorChoosing == i)
+                    {
+                        i = (int)Math.floor(Math.random() * size);
+                    }
+                    priorChoosing = i;
                     String s = (String)conversions.keySet().toArray()[i];
                     String input = inputText.getText().toString().replaceAll("[^0-9.]", "");
                     double value;

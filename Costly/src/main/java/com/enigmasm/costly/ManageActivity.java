@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
@@ -74,15 +75,13 @@ public class ManageActivity extends Activity {
                 //Gets the text created by the user
                 String itemName = name.getText().toString();
                 String itemPrice = price.getText().toString();
-                if (itemName != null && itemPrice != null){
+                if (!(itemName == null || itemName.isEmpty()) && !(itemPrice == null || itemPrice.isEmpty())){
                     // Create a new map of values, where column names are the keys
                     ContentValues values = new ContentValues();
                     values.put(SpenDBHelper.FeedEntry.COLUMN_NAME, itemName);
                     values.put(SpenDBHelper.FeedEntry.COLUMN_PRICE, itemPrice);
                     DiscoverItem item = new DiscoverItem(itemName,itemPrice);
                     ref.push().setValue(item);
-
-                    System.out.println("ADDED TO DATABASE");
                     // Insert the new row, returning the primary key value of the new row
                     long newRowId;
                     newRowId = db.insert(
@@ -91,6 +90,8 @@ public class ManageActivity extends Activity {
                             values);
                     aa.insert(itemName,aa.getCount());
                     aa.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getApplicationContext(), "You did not fill out the fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
