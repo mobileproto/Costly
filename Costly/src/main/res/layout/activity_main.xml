@@ -15,9 +15,14 @@
         android:ems="10"
         android:id="@+id/inputText"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
-        android:text="100" />
+        android:gravity="center_horizontal"
+        android:autoText="false"
+        android:layout_alignLeft="@+id/costButton"
+        android:layout_alignStart="@+id/costButton"
+        android:layout_alignRight="@+id/costButton"
+        android:layout_alignEnd="@+id/costButton"
+        android:hint="$100.00" />
 
     <Button
         android:layout_width="wrap_content"

@@ -63,11 +63,23 @@ public class MainActivity extends Activity {
         convert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int i = (int)Math.floor(Math.random() * conversions.keySet().size());
-                //TODO: Should handle an empty conversions table
-                String s = (String)conversions.keySet().toArray()[i];
-                double trueCost = Double.parseDouble(inputText.getText().toString()) / conversions.get(s);
-                resultText.setText(new DecimalFormat("#.##").format(trueCost) + " " + s);
+                int size = conversions.keySet().size();
+                if(size > 0)
+                {
+                    int i = (int)Math.floor(Math.random() * size);
+                    String s = (String)conversions.keySet().toArray()[i];
+                    String input = inputText.getText().toString().replaceAll("[^0-9.]", "");
+                    double value;
+                    try {
+                        value = Double.parseDouble(input);
+                        double trueCost = value / conversions.get(s);
+                        resultText.setText(new DecimalFormat("#.##").format(trueCost) + " " + s);
+                    } catch (Exception e) {
+                        resultText.setText("That number is not in the right format. Too many .s, perhaps?");
+                    }
+                } else {
+                    resultText.setText("You have no relationships defined :(");
+                }
 
             }
         });
