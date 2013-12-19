@@ -34,7 +34,7 @@ public class DiscoverActivity extends Activity {
 
 
         List<String> files = new ArrayList<String>(Arrays.asList(fileList()));
-        Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/converts");
+        Firebase ref = new Firebase("https://costly.firebaseio.com/converts");
 
         final DiscoverListAdapter aa = new DiscoverListAdapter(ref, this, R.layout.discover_item);
 

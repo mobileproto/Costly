@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -35,7 +34,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/converts");
+        Firebase ref = new Firebase("https://costly.firebaseio.com/converts");
         setContentView(R.layout.activity_main);
         mDBHelper = new SpenDBHelper(this);
         Animation in = AnimationUtils.loadAnimation(this,

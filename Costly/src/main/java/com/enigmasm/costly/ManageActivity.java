@@ -26,7 +26,7 @@ public class ManageActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Firebase ref = new Firebase("https://costly.firebaseIO-demo.com/converts");
+        final Firebase ref = new Firebase("https://costly.firebaseio.com/converts");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
 
@@ -57,7 +57,6 @@ public class ManageActivity extends Activity {
         savedDB.moveToFirst();
         while(!savedDB.isAfterLast()){
             String itemName = savedDB.getString(1);
-            System.out.println("RETRIEVED: " + itemName);
             aa.insert(itemName, 0);
             aa.notifyDataSetChanged();
             savedDB.moveToNext();
